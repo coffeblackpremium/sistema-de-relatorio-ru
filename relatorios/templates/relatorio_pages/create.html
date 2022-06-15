@@ -3,18 +3,30 @@
 {% block title%} Faça seu Registro {% endblock %}
 {% block content %}
 <h1 style="text-align:center; font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: bold;">Registrar</h1>
-<div class=" container border shadow-lg bg-body rounded ">
-    <form class="d-flex justify-content-center my-4", method="post">
+<div class="container border shadow-lg bg-body rounded ">
+    <form class="d-flex justify-content-center my-4" action="{% url 'relatorio_table'%}" method="post">
+      {% csrf_token %}
       <div class="row">
         <div class="col-md-6">
-          <label for="form-control">Nome</label>
+          <label for="username">Username</label>
+          {{form.username}}
+          <label for="first_name">Nome</label>
           {{form.first_name}}
+          <label for="password1">Senha</label>
+          {{form.password1}}
+          <label for="email">Email</label>
+          {{form.email}}
         </div>
         <div class="col-md-6">
-        </div>
-        <div class="col-md-6 my-4">
+          <label for="last_name">Sobrenome</label>
+          {{form.last_name}}
+          <label for="password2">Confirme a senha</label>
+          {{form.password2}}
           <label for="sector_name">Setor</label>
           {{form.sector_name}}
+        </div>
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-success mt-3 border rounded">Registrar</button>
         </div>
       </div>
     </form>

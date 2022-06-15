@@ -8,12 +8,6 @@ from .choices_coord import LISTA_COORDENACAO
 #Entrar no site para ter como exemplo: https://stackoverflow.com/questions/48049498/django-usercreationform-custom-fields
 
 
-TEST_CHOICE = [
-    ('1', "One"),
-    ('2', "Two"),
-    ('3', "Three"),
-]
-
 class RegisterEmployee(UserCreationForm):
     username = forms.CharField(help_text="Necessário ter um Usuario para ser seu login", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite um usuario para acessar sua conta'}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Primeiro Nome'}), max_length=32, help_text='Digite o seu Primeiro nome')
@@ -24,20 +18,24 @@ class RegisterEmployee(UserCreationForm):
     sector_name = forms.ChoiceField(
         required=True,
         choices=LISTA_COORDENACAO,
-
     )
-
     class Meta(UserCreationForm):
         model = User
         fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email')
 
     def save(self, commit=True):
-        user = super(RegisterEmployee, self).save(commit=True)
+        user = super(RegisterEmployee, self).save(commit=False)
+
         user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.sector_name = self.cleaned_data['sector_name']
+
         if commit:
             user.save()
         return user
+
     def __init__(self, *args, **kwargs):
         super(RegisterEmployee, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['class'] = 'form-control my-1'
