@@ -2,7 +2,6 @@ from dataclasses import fields
 from pickle import LIST
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-'from django.contrib.auth.models import User'
 from psutil import users
 from traitlets import default
 
@@ -33,6 +32,7 @@ class RegisterEmployee(UserCreationForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.sector_name = self.cleaned_data['sector_name']
+        user.set_password(self.cleaned_data['password1'])
 
         if commit:
             user.save()
