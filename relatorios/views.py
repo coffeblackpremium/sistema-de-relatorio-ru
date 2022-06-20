@@ -5,7 +5,7 @@ from .forms import RegisterEmployee
 
 # Create your views here.
 
-def relatorio_table(request):
+def register_user(request):
     if request.method == 'POST':
         form = RegisterEmployee(request.POST)
         if form.is_valid():
@@ -13,4 +13,7 @@ def relatorio_table(request):
             return redirect('/home/test')
     else:
         form = RegisterEmployee()
-    return render(request, 'relatorio_pages/create.html', {'form':form})
+    return render(request, 'users/register.html', {'form':form})
+
+def login_user(request):
+    return render(request, 'users/login.html')

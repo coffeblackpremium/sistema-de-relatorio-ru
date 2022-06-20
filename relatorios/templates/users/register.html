@@ -4,7 +4,7 @@
 {% block content %}
 <h1 style="text-align:center; font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: bold;">Registrar</h1>
 <div class="container border shadow-lg bg-body rounded ">
-    <form class="d-flex justify-content-center my-4" action="{% url 'relatorio_table'%}" method="post">
+    <form class="d-flex justify-content-center my-4" action="{% url 'register_user'%}" method="post">
       {% csrf_token %}
       <div class="row">
         <div class="col-md-6">
