@@ -1,8 +1,12 @@
-from tkinter import Widget
+from secrets import choice
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from .choices_coordenacao import LISTA_COORDENACAO
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-class Employee(models.Model):
-    pass
+class User(AbstractUser):
+    sector_name = models.CharField(max_length=100, choices=LISTA_COORDENACAO)
+
+    def __str__(self):
+        return f'{self.sector_name}'

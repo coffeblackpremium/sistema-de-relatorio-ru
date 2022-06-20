@@ -1,6 +1,6 @@
 
 LISTA_COORDENACAO =(
-('1','Coord. Gestão de Trabalho'),
+('Coord. Gestão de Trabalho','Coord. Gestão de Trabalho'),
 ('Coord. Regulação e Gestão Financeira do Suas','Coord. Regulação e Gestão Financeira do Suas'),
 ('Coord. Vigilância Socioassistencial','Coord. Vigilância Socioassistencial'),
 ('Coord. Proteção Social Básica','Coord. Proteção Social Básica'),
