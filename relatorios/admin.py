@@ -1,3 +1,8 @@
 from django.contrib import admin
+from relatorios.models import User
 
-# Register your models here.
+#Adicionando o Modelo de Banco de dados no Site da Administração
+admin.site.register(User)
+
+
+# Create your tests here.

@@ -8,9 +8,9 @@ from traitlets import default
 from relatorios.models import User
 from .choices_coordenacao import LISTA_COORDENACAO
 
-#Entrar no site para ter como exemplo: https://stackoverflow.com/questions/48049498/django-usercreationform-custom-fields
 
 
+#Crianndo um Formulario para Registro
 class RegisterEmployee(UserCreationForm):
     username = forms.CharField(help_text="Necessário ter um Usuario para ser seu login", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite um usuario para acessar sua conta'}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Primeiro Nome'}), max_length=32, help_text='Digite o seu Primeiro nome')
@@ -19,11 +19,12 @@ class RegisterEmployee(UserCreationForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Digite a senha novamente'}))
     sector_name = forms.ChoiceField(
-        choices=LISTA_COORDENACAO,
+        choices=LISTA_COORDENACAO,  
     )
+    #Usando o Models User do 'relatorios/models'
     class Meta(UserCreationForm):
         model = User
-        fields = UserCreationForm.Meta.fields + ('sector_name','first_name', 'last_name', 'email')
+        fields = UserCreationForm.Meta.fields + ('sector_name','first_name', 'last_name', 'email',)
     
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
