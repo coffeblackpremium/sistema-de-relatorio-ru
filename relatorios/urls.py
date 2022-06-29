@@ -7,4 +7,5 @@ from .views import *
 urlpatterns = [
     path('home/registrar', view=register_user, name="register_user"),
     path('contas/login/', view=login_user, name='login_user'),
+    path('home/tableEvent', view=table_event, name='table_event')
 ]

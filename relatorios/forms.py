@@ -4,8 +4,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from psutil import users
 from traitlets import default
+from django.forms import ModelForm
 
-from relatorios.models import User
+from relatorios.models import TableActionModel, TableEventModel, User
 from .choices_coordenacao import LISTA_COORDENACAO
 
 
@@ -43,3 +44,16 @@ class RegisterEmployee(UserCreationForm):
         super(RegisterEmployee, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control my-1'
+
+class TableActionForm(ModelForm):
+    class Meta:
+        model = TableActionModel
+        fields = ['acao_realizada', 'tecnico_presencial', 'tecnico_nao_presencial',
+        'outras_acoes', 'numbers_employee', 'description_action', 'date_actions']
+
+    
+
+class TableEventForm(ModelForm):
+    class Meta:
+        model = TableEventModel
+        fields = ['title_event', 'event_feature', 'date_initial', 'date_final']
