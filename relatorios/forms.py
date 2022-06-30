@@ -2,8 +2,6 @@ from dataclasses import fields
 from pickle import LIST
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from psutil import users
-from traitlets import default
 from django.forms import ModelForm
 
 from relatorios.models import TableActionModel, TableEventModel, User
