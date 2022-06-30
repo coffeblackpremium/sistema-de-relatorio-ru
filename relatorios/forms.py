@@ -59,3 +59,6 @@ class TableEventForm(ModelForm):
             'date_initial': forms.DateInput(attrs={'type':'date'}),
             'date_final': forms.DateInput(attrs={'type':'date'})
         }
+    def __init__(self, *args, **kwargs):
+        super(TableEventForm, self).__init__(*args, **kwargs)
+        self.fields['event_feature'].label = "Característica do Evento"
