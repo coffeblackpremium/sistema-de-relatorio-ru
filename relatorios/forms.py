@@ -2,7 +2,7 @@ from dataclasses import fields
 from pickle import LIST
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm
+from django.forms import DateInput, ModelForm
 
 from relatorios.models import TableActionModel, TableEventModel, User
 from .choices_coordenacao import LISTA_COORDENACAO
@@ -49,9 +49,13 @@ class TableActionForm(ModelForm):
         fields = ['acao_realizada', 'tecnico_presencial', 'tecnico_nao_presencial',
         'outras_acoes', 'numbers_employee', 'description_action', 'date_actions']
 
-    
 
 class TableEventForm(ModelForm):
     class Meta:
         model = TableEventModel
         fields = ['title_event', 'event_feature', 'date_initial', 'date_final']
+        widgets = {
+            'title_event': forms.TextInput(),
+            'date_initial': forms.DateInput(attrs={'type':'date'}),
+            'date_final': forms.DateInput(attrs={'type':'date'})
+        }
