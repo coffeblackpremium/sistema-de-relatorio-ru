@@ -59,6 +59,18 @@ class TableEventForm(ModelForm):
             'date_initial': forms.DateInput(attrs={'type':'date'}),
             'date_final': forms.DateInput(attrs={'type':'date'})
         }
+
+    def clean(self):
+        super(TableEventForm, self).clean()
+
+        title_event = self.cleaned_data.get("title_event")
+        event_feature = self.cleaned_data.get("event_feature")
+        date_initial = self.cleaned_data.get("date_initial")
+        date_final = self.cleaned_data.get("date_final")
+
+        return self.cleaned_data
+
+
     def __init__(self, *args, **kwargs):
         super(TableEventForm, self).__init__(*args, **kwargs)
         self.fields['event_feature'].label = "Característica do Evento"
