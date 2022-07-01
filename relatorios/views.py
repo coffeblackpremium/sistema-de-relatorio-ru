@@ -25,10 +25,10 @@ def login_user(request):
 @user_required
 def table_event(request):
     if request.method == 'POST':
-        form = TableEventForm(request.POST)
-        if form.is_valid():
-            form.save()
+        form_table_event = TableEventForm(request.POST)
+        if form_table_event.is_valid():
+            form_table_event.save()
             return redirect('/')
     else:
-        form = TableEventForm()
-    return render(request, 'users/tableEvent/tableEventRegister.html', {'form':form})
+        form_table_event = TableEventForm()
+    return render(request, 'users/tableEvent/tableEventRegister.html', {'form_table_event':form_table_event})
