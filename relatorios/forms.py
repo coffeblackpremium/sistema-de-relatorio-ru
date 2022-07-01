@@ -48,6 +48,9 @@ class TableActionForm(ModelForm):
         model = TableActionModel
         fields = ['acao_realizada', 'tecnico_presencial', 'tecnico_nao_presencial',
         'outras_acoes', 'numbers_employee', 'description_action', 'date_actions']
+        widgets = {
+            'date_actions': forms.DateInput(attrs={'type':'date'}),
+        }
 
 
 class TableEventForm(ModelForm):

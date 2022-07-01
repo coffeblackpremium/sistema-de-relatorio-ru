@@ -43,4 +43,4 @@ def table_action(request):
             return redirect('/')
     else:
         form_table_action = TableActionForm()
-    return render(request, 'users/tableAction/tableActionRegister', {'form_table_action':form_table_action})
+    return render(request, 'users/tableAction/tableActionRegister.html', {'form_table_action':form_table_action})
