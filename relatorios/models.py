@@ -62,7 +62,7 @@ class TableActionModel(models.Model):
     tecnico_nao_presencial = models.CharField(max_length=100, choices=TECNICO_NAO_PRESENCIAL_CHOICE)
     outras_acoes = models.CharField(max_length=100, choices=OUTRAS_ACOES_CHOICE)
     numbers_employee = models.IntegerField('Numero de Funcionario',blank=False, null=False)
-    description_action = models.TextField('Descrição da Ação', max_length=100, blank=False, null=False)
+    description_action = models.TextField('Descrição da Ação', max_length=255, blank=False, null=False)
     date_actions = models.DateField('Data', blank=False, null=False)
     date_to_publication = models.DateField('Data da Publicação', default=timezone.now)
 

@@ -1,5 +1,6 @@
 from secrets import choice
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 
 from relatorios.models import TableActionModel, TableEventModel, User
@@ -56,3 +57,23 @@ def tables(request):
     tables_actions = TableActionModel.objects.filter(user=request.user).values()
     tables_events = TableEventModel.objects.filter(user=request.user).values()
     return render(request, 'tables/viewAllTable.html', {'tables_actions':tables_actions, 'tables_events':tables_events})
+
+@login_required(login_url='contas/login')
+@user_required
+def deleteTableAction(request, id):
+    object_table_action = get_object_or_404(TableActionModel, id=id)
+
+    if request.method == "POST":
+        object_table_action.delete()
+        return redirect("/users/tabelas")
+    return render(request, "delete_view.html")
+
+@login_required(login_url='contas/login')
+@user_required
+def deleteTableEvent(request, id):
+    object_table_event = get_object_or_404(TableEventModel, id=id)
+
+    if request.method == "POST":
+        object_table_event.delete()
+        return redirect('/users/tabelas')
+    return render(request, "delete_view.html")

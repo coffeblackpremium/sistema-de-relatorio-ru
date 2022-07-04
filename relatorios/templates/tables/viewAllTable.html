@@ -20,7 +20,7 @@
 <tbody>
     {% for table in tables_actions %}
     <tr>
-        <th scope="row">{{table.user}}</th>
+        <th scope="row">{{table.id}}</th>
         <td>{{table.acao_realizada}}</td>
         <td>{{table.tecnico_nao_presencial}}</td>
         <td>{{table.tecnico_presencial}}</td>
@@ -28,12 +28,17 @@
         <td>{{table.numbers_employee}}</td>
         <td>{{table.description_action}}</td>
         <td>{{table.date_actions}}</td>
+        <form action="{% url 'deleteTableAction' id=table.id %}" method="POST">
+            {% csrf_token %}
+            <td><button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
+        </form>
+    
     </tr>
+        {% endif %}
     {% endfor %}
     </tbody>
   </table>
 </div>
-
 
 <div class="container">
     <table class="table">
@@ -43,7 +48,7 @@
         <th scope="col">ID</th>
         <th scope="col">Nome do Evento</th>
         <th scope="col">Data do Evento</th>
-  </tr>
+    </tr>
 </thead>
 <tbody>
     {% for table in tables_events %}
@@ -51,6 +56,10 @@
         <th scope="row">{{table.user}}</th>
         <td>{{table.title_event}}</td>
         <td>{{table.event_feature}}</td>
+        <form action="{% url 'deleteTableEvent' id=table.id %}" method="POST">
+            {% csrf_token %}
+            <td><button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
+        </form>
     </tr>
     {% endfor %}
     </tbody>
