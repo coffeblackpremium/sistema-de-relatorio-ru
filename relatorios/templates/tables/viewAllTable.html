@@ -9,7 +9,12 @@
     <tr>
         <th scope="col">ID</th>
         <th scope="col">Tipo de Registro</th>
-        <th scope="col">Data</th>
+        <th scope="col">Tecnico não Presencial</th>
+        <th scope="col">Tecnico Presencial</th>
+        <th scope="col">Outras Ações</th>
+        <th scope="col">Numero de Funcionario Atendidos</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Data Ação</th>
   </tr>
 </thead>
 <tbody>
@@ -17,8 +22,12 @@
     <tr>
         <th scope="row">{{table.user}}</th>
         <td>{{table.acao_realizada}}</td>
+        <td>{{table.tecnico_nao_presencial}}</td>
+        <td>{{table.tecnico_presencial}}</td>
+        <td>{{table.outras_acoes}}</td>
+        <td>{{table.numbers_employee}}</td>
+        <td>{{table.description_action}}</td>
         <td>{{table.date_actions}}</td>
-        <td>{{table.date_to_publication}}</td>
     </tr>
     {% endfor %}
     </tbody>

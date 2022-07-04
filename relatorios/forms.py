@@ -51,6 +51,9 @@ class TableActionForm(ModelForm):
         widgets = {
             'date_actions': forms.DateInput(attrs={'type':'date'}),
         }
+    def __init__(self, *args, **kwargs):
+        super(TableActionForm, self).__init__(*args, **kwargs)
+        self.fields['numbers_employee'].label = "Numero de Funcionarios Atendidos"
 
 
 class TableEventForm(ModelForm):
