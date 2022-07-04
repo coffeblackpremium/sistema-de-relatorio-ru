@@ -10,6 +10,7 @@ from django.utils import timezone
 # Create your models here.
 
 class User(AbstractUser):
+    id = models.AutoField(primary_key=True)
     sector_name = models.CharField(max_length=100, choices=LISTA_COORDENACAO)
 
     def __str__(self):

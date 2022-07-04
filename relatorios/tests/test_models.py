@@ -1,7 +1,7 @@
 from django.http import HttpRequest
 from django.test import TestCase
 from relatorios.forms import TableEventForm
-from relatorios.models import User
+from relatorios.models import TableActionModel, TableEventModel, User
 
 class TestTableEventModel(TestCase):
     
@@ -43,4 +43,7 @@ class TestTableEventModel(TestCase):
             form.save()
         if form2.is_valid():
             form2.save()
-        self.assertTrue(form and form2)
+
+        tableInUser01 = TableEventModel.objects.filter(user=user).values()
+        tableInUser02 = TableEventModel.objects.filter(user=user2).values()
+        self.assertNotEqual(tableInUser01, tableInUser02)

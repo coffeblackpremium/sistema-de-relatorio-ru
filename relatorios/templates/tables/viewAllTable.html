@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+
+    <table class="table">
+        <thead class="thead-dark">
+    <h2 class="text-center my-4">Registro Unificado de Ações</h2>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Tipo de Registro</th>
+        <th scope="col">Data</th>
+  </tr>
+</thead>
+<tbody>
+    {% for table in tables_actions %}
+    <tr>
+        <th scope="row">{{table.user}}</th>
+        <td>{{table.acao_realizada}}</td>
+        <td>{{table.date_actions}}</td>
+        <td>{{table.date_to_publication}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+    <h2 class="text-center my-5">Registro Unificado de Eventos</h2>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome do Evento</th>
+        <th scope="col">Data do Evento</th>
+  </tr>
+</thead>
+<tbody>
+    {% for table in tables_events %}
+    <tr>
+        <th scope="row">{{table.user}}</th>
+        <td>{{table.title_event}}</td>
+        <td>{{table.event_feature}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
