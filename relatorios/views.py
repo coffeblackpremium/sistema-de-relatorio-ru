@@ -93,3 +93,17 @@ def table_action_update(request, id):
     context['form_table_action'] = form
     return render(request, "tables/tableAction/tableActionUpdate.html", context=context)
 
+@login_required(login_url='contas/login')
+@user_required
+def table_event_update(request, id):
+    context = {}
+    
+    get_object_model = get_object_or_404(TableEventModel, id=id)
+    form = TableEventForm(request.POST or None, instance=get_object_model)
+
+    if form.is_valid():
+        form.save()
+        return redirect('/users/tabelas')
+    context['form_table_event'] = form
+    return render(request, 'tables/tableEvent/tableEventUpdate.html', context=context)
+

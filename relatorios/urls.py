@@ -11,5 +11,6 @@ urlpatterns = [
     path('tabelas', view=tables, name="tables"),
     path('deleteTableAction/<id>', view=deleteTableAction, name="deleteTableAction"),
     path('deleteTableEvent/<id>', view=deleteTableEvent, name="deleteTableEvent"),
-    path('update/<id>', view=table_action_update, name="tableActionUpdate"),
+    path('atualizar-tabela-acao/<id>', view=table_action_update, name="tableActionUpdate"),
+    path('atualizar-tabela-eventos/<id>', view=table_event_update, name="tableEventUpdate")
 ]

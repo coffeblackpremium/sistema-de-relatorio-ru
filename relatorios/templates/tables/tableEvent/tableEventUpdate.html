@@ -1,0 +1,31 @@
+{% extends 'index.html'%}
+{% block title%} Atualizar Tabela de Eventos {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <h2 class="font-weight-bold text-center mt-4">Eventos </h1>
+        <div class="row mx-auto">
+            <div class="col-md-2">
+            </div>
+            <div class="col-4 my-4">
+                {{form_table_event.title_event|as_crispy_field}}
+                {{ form_table_event.event_feature|as_crispy_field}}
+            </div>
+            <div class="col-4 my-4">
+                {{ form_table_event.date_initial|as_crispy_field}}
+                {{ form_table_event.date_final|as_crispy_field}}
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-success btn-md text-center">Atualizar os Dados</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
