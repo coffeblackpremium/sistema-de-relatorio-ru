@@ -48,7 +48,7 @@ def table_action(request):
             profile.user = request.user
             profile.save()
             form_table_action.save()
-            return redirect('/users/tabela')
+            return redirect('/users/tabelas')
     else:
         form_table_action = TableActionForm()
     return render(request, 'tables/tableAction/tableActionRegister.html', {'form_table_action':form_table_action})

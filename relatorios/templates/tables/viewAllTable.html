@@ -32,6 +32,13 @@
             {% csrf_token %}
             <td><button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
         </form>
+        <td><a href="{% url 'tableActionUpdate' id=table.id%}">
+
+            <button type="button" class="btn btn-info">
+                <i class="fas fa-edit"></i>
+            </button>
+        </a>
+        </td>
     
     </tr>
     {% endfor %}
@@ -59,6 +66,13 @@
             {% csrf_token %}
             <td><button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
         </form>
+        <td><a href="{% url 'tableEventUpdate' id=table.id%}">
+
+            <button type="button" class="btn btn-info">
+                <i class="fas fa-edit"></i>
+            </button>
+        </a>
+        </td>
     </tr>
     {% endfor %}
     </tbody>
