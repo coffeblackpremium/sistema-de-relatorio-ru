@@ -16,12 +16,14 @@
                 {{form_table_action.acao_realizada|as_crispy_field }}
                 {{ form_table_action.tecnico_presencial|as_crispy_field }}
                 {{ form_table_action.date_actions|as_crispy_field }}
-                {{ form_table_action.description_action|as_crispy_field }}
             </div>
             <div class="col-4 my-4">
                 {{ form_table_action.tecnico_nao_presencial|as_crispy_field }}
                 {{ form_table_action.outras_acoes|as_crispy_field }}
                 {{ form_table_action.numbers_employee|as_crispy_field }}
+            </div>
+            <div class="col-lg-8 mx-auto">
+                {{ form_table_action.description_action|as_crispy_field }}
             </div>
         </div>
         <div class="container">

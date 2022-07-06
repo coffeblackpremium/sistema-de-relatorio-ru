@@ -46,4 +46,7 @@ class TestTableEventModel(TestCase):
 
         tableInUser01 = TableEventModel.objects.filter(user=user).values()
         tableInUser02 = TableEventModel.objects.filter(user=user2).values()
-        self.assertNotEqual(tableInUser01, tableInUser02)
+        self.assertTrue(tableInUser01, tableInUser02)
+
+class test_delete_method_in_template(TestCase):
+    pass

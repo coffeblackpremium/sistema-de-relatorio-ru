@@ -30,9 +30,9 @@
         <td>{{table.date_actions}}</td>
         <form action="{% url 'deleteTableAction' id=table.id %}" method="POST">
             {% csrf_token %}
-            <td><button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
+            <td><button type="submit" class="btn btn-danger" confirm="Deseja apagar ?"><i class="fa-solid fa-trash"></i></button></td>
         </form>
-        <td><a href="{% url 'tableActionUpdate' id=table.id%}">
+        <td><a href="{% url 'tableEventUpdate' id=table.id%}">
 
             <button type="button" class="btn btn-info">
                 <i class="fas fa-edit"></i>
@@ -53,7 +53,7 @@
     <tr>
         <th scope="col">ID</th>
         <th scope="col">Nome do Evento</th>
-        <th scope="col">Data do Evento</th>
+        <th scope="col">Tipo do Evento</th>
     </tr>
 </thead>
 <tbody>
@@ -62,21 +62,52 @@
         <th scope="row">{{table.id}}</th>
         <td>{{table.title_event}}</td>
         <td>{{table.event_feature}}</td>
-        <form action="{% url 'deleteTableEvent' id=table.id %}" method="POST">
+        <form method="post" action="{% url 'deleteTableEvent' id=table.id %}">
             {% csrf_token %}
-            <td><button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
+            <a href="{% url 'deleteTableEvent' id=table.id %}"  id="delete-item">
+                <td><button type="submit" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i>
+                </button></td>
+            </a>
         </form>
         <td><a href="{% url 'tableEventUpdate' id=table.id%}">
-
             <button type="button" class="btn btn-info">
                 <i class="fas fa-edit"></i>
             </button>
+
         </a>
-        </td>
+    </td>
     </tr>
     {% endfor %}
     </tbody>
   </table>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="delete-item-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Deletar Formulario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Deseja deletar este formulario ?
+        </div>
+        <div class="modal-footer">
+           <form method="post" id="item-delete-form">
+               <button type="button" class="btn btn-secondary" id="btnFechar" data-dismiss="modal">Fechar</button>
+                {% csrf_token %}
+                    <button type="submit" class="btn btn-primary" id="confirm-delete-item-button">Deletar</button>
+                </a>
+           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+    
+</script>
 {% endblock %}
