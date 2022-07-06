@@ -1,0 +1,5 @@
+
+$(function () {
+    $('#tableActionModal').modal('toogle')
+})  
+

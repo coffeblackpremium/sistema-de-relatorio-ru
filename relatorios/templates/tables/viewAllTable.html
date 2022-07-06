@@ -1,9 +1,10 @@
 {% extends 'index.html' %}
+{% load static%}
 {% block title %} 📋 Tabelas {% endblock %}
 {% block content %}
 <div class="container">
 
-    <table class="table">
+    <table class="table table-stripped" id="table-action">
         <thead class="thead-dark">
     <h2 class="text-center my-4">Registro Unificado de Ações</h2>
     <tr>
@@ -12,7 +13,7 @@
         <th scope="col">Tecnico não Presencial</th>
         <th scope="col">Tecnico Presencial</th>
         <th scope="col">Outras Ações</th>
-        <th scope="col">Numero de Funcionario Atendidos</th>
+        <th scope="col">Num. de Funcionarios</th>
         <th scope="col">Descrição</th>
         <th scope="col">Data Ação</th>
   </tr>
@@ -20,13 +21,13 @@
 <tbody>
     {% for table in tables_actions %}
     <tr>
-        <th scope="row">{{table.id}}</th>
+        <th scope="row" id="table-action-id">{{table.id}}</th>
         <td>{{table.acao_realizada}}</td>
         <td>{{table.tecnico_nao_presencial}}</td>
         <td>{{table.tecnico_presencial}}</td>
         <td>{{table.outras_acoes}}</td>
         <td>{{table.numbers_employee}}</td>
-        <td>{{table.description_action}}</td>
+        <td><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#tableActionModal">Visualizar</a></td>
         <td>{{table.date_actions}}</td>
         <form action="{% url 'deleteTableAction' id=table.id %}" method="POST">
             {% csrf_token %}
@@ -84,30 +85,34 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="delete-item-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="tableActionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Deletar Formulario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h5 class="modal-title" id="exampleModalLongTitle">Descrição</h5>
         </div>
         <div class="modal-body">
-          Deseja deletar este formulario ?
+          {% for table in tables_actions %}
+            {{table.description_action}}
+          {% endfor %}
         </div>
         <div class="modal-footer">
-           <form method="post" id="item-delete-form">
-               <button type="button" class="btn btn-secondary" id="btnFechar" data-dismiss="modal">Fechar</button>
-                {% csrf_token %}
-                    <button type="submit" class="btn btn-primary" id="confirm-delete-item-button">Deletar</button>
-                </a>
-           </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonClose">Fechar Descrição</button>
         </div>
       </div>
     </div>
   </div>
-<script>
-    
+
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script type='text/javascript'>
+      $(document).ready(function(){
+          // Close modal on button click
+          $(".btn").click(function(){
+            $("#tableActionModal").modal('hide');
+          });
+        });
 </script>
 {% endblock %}
