@@ -9,6 +9,7 @@ urlpatterns = [
     path('formulario-de-evento', view=table_event, name='table_event'),
     path('formulario-de-acao', view=table_action, name="table_action"),
     path('tabelas', view=tables, name="tables"),
+    path('get-id/<id>', view=description_table, name="description_table"),
     path('deleteTableAction/<id>', view=deleteTableAction, name="deleteTableAction"),
     path('deleteTableEvent/<id>', view=deleteTableEvent, name="deleteTableEvent"),
     path('atualizar-tabela-acao/<id>', view=table_action_update, name="tableActionUpdate"),

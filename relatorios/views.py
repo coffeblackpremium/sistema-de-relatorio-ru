@@ -58,8 +58,15 @@ def table_action(request):
 def tables(request):
     tables_actions = TableActionModel.objects.filter(user=request.user).values()
     tables_events = TableEventModel.objects.filter(user=request.user).values()
-    
     return render(request, 'tables/viewAllTable.html', {'tables_actions':tables_actions, 'tables_events':tables_events})
+
+@login_required(login_url='contas/login')
+@user_required
+def description_table(request, id):
+    tables_actions = TableActionModel.objects.filter(user=request.user).values()
+    id_description = get_object_or_404(tables_actions, id=id)
+    return render(request, 'tables/tableAction/tableActionGetDescription.html', {'id_description':id_description})
+
 
 @login_required(login_url='contas/login')
 @user_required

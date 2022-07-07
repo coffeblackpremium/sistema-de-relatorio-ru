@@ -27,7 +27,11 @@
         <td>{{table.tecnico_presencial}}</td>
         <td>{{table.outras_acoes}}</td>
         <td>{{table.numbers_employee}}</td>
-        <td><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#tableActionModal">Visualizar</a></td>
+        <form action="{% url 'description_table' id=table.id %}" method="get">
+
+          <td><button type="submit"><a href="{% url 'description_table' id=table.id %}" class="text-decoration-none">Visualizar
+          </a></button></td>
+        </form>
         <td>{{table.date_actions}}</td>
         <form action="{% url 'deleteTableAction' id=table.id %}" method="POST">
             {% csrf_token %}
@@ -42,6 +46,23 @@
         </td>
     
     </tr>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="tableActionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Descrição</h5>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonClose">Fechar Descrição</button>
+            </div>
+          </div>
+        </div>
+      </div>
     {% endfor %}
     </tbody>
   </table>
@@ -83,25 +104,6 @@
     </tbody>
   </table>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="tableActionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Descrição</h5>
-        </div>
-        <div class="modal-body">
-          {% for table in tables_actions %}
-            {{table.description_action}}
-          {% endfor %}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonClose">Fechar Descrição</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script
   src="https://code.jquery.com/jquery-3.6.0.js"
