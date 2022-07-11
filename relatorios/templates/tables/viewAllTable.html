@@ -37,7 +37,7 @@
             {% csrf_token %}
             <td><button type="submit" class="btn btn-danger" confirm="Deseja apagar ?"><i class="fa-solid fa-trash"></i></button></td>
         </form>
-        <td><a href="{% url 'tableEventUpdate' id=table.id%}">
+        <td><a href="{% url 'tableActionUpdate' id=table.id%}">
 
             <button type="button" class="btn btn-info">
                 <i class="fas fa-edit"></i>

@@ -64,8 +64,12 @@ def tables(request):
 @user_required
 def description_table(request, id):
     tables_actions = TableActionModel.objects.filter(user=request.user).values()
+    tables_events = TableEventModel.objects.filter(user=request.user).values()
     id_description = get_object_or_404(tables_actions, id=id)
-    return render(request, 'tables/tableAction/tableActionGetDescription.html', {'id_description':id_description})
+    return render(request, 'tables/tableAction/tableActionGetDescription.html', 
+    {'id_description':id_description,
+    'tables_actions':tables_actions,
+     'tables_events':tables_events})
 
 
 @login_required(login_url='contas/login')
@@ -106,12 +110,11 @@ def table_action_update(request, id):
 @user_required
 def table_event_update(request, id):
     context = {}
-    
     get_object_model = get_object_or_404(TableEventModel, id=id)
     form = TableEventForm(request.POST or None, instance=get_object_model)
 
     if form.is_valid():
         form.save()
         return redirect('/users/tabelas')
-    context['form_table_event'] = form
+    context = {'form_table_event':form}
     return render(request, 'tables/tableEvent/tableEventUpdate.html', context=context)

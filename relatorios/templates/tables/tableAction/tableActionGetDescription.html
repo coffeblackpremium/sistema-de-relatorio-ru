@@ -1,18 +1,124 @@
-{% extends 'index.html'%}
+{% extends 'index.html' %}
+{% load static%}
+{% block title %} 📋 Tabelas {% endblock %}
+{% block content %}
+<div class="container">
 
-{% block content%}
-    {{id_description.description_action}}
+    <table class="table table-stripped" id="table-action">
+        <thead class="thead-dark">
+    <h2 class="text-center my-4">Registro Unificado de Ações</h2>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Tipo de Registro</th>
+        <th scope="col">Tecnico não Presencial</th>
+        <th scope="col">Tecnico Presencial</th>
+        <th scope="col">Outras Ações</th>
+        <th scope="col">Num. de Funcionarios</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Data Ação</th>
+  </tr>
+</thead>
+<tbody>
+    {% for table in tables_actions %}
+    <tr>
+        <th scope="row" id="table-action-id">{{table.id}}</th>
+        <td>{{table.acao_realizada}}</td>
+        <td>{{table.tecnico_nao_presencial}}</td>
+        <td>{{table.tecnico_presencial}}</td>
+        <td>{{table.outras_acoes}}</td>
+        <td>{{table.numbers_employee}}</td>
+        <form action="{% url 'description_table' id=table.id %}" method="get">
 
-<script
-    src="https://code.jquery.com/jquery-3.6.0.js"
-    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
-<script type='text/javascript'>
-    $(document).ready(function(){
-        // Close modal on button click
-        $(".btn").click(function(){
-            $("#tableActionModal").modal('hide');
-        });
+          <td><button type="submit"><a href="{% url 'description_table' id=table.id %}" class="text-decoration-none">Visualizar
+          </a></button></td>
+        </form>
+        <td>{{table.date_actions}}</td>
+        <form action="{% url 'deleteTableAction' id=table.id %}" method="POST">
+            {% csrf_token %}
+            <td><button type="submit" class="btn btn-danger" confirm="Deseja apagar ?"><i class="fa-solid fa-trash"></i></button></td>
+        </form>
+        <td><a href="{% url 'tableActionUpdate' id=table.id%}">
+            
+            <button type="button" class="btn btn-info">
+                <i class="fas fa-edit"></i>
+            </button>
+        </a>
+    </td>
+    
+</tr>
+
+<!-- Modal -->
+<div class="modal fade" id="tableActionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Descrição</h5>
+            </div>
+            <div class="modal-body">
+                {{id_description.description_action}}
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonClose">Fechar Descrição</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+    <h2 class="text-center my-5">Registro Unificado de Eventos</h2>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome do Evento</th>
+        <th scope="col">Tipo do Evento</th>
+    </tr>
+</thead>
+<tbody>
+    {% for table in tables_events %}
+    <tr>
+        <th scope="row">{{table.id}}</th>
+        <td>{{table.title_event}}</td>
+        <td>{{table.event_feature}}</td>
+        <form method="post" action="{% url 'deleteTableEvent' id=table.id %}">
+            {% csrf_token %}
+            <a href="{% url 'deleteTableEvent' id=table.id %}"  id="delete-item">
+                <td><button type="submit" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i>
+                </button></td>
+            </a>
+        </form>
+        <td><a href="{% url 'tableEventUpdate' id=table.id%}">
+            <button type="button" class="btn btn-info">
+                <i class="fas fa-edit"></i>
+            </button>
+
+        </a>
+    </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script type='text/javascript'>
+    $(window).on('load', function() {
+        $('#tableActionModal').modal('show');
     });
-  </script>
+      $(document).ready(function(){
+          // Close modal on button click
+          $(".btn").click(function(){
+            $("#tableActionModal").modal('hide');
+          });
+        });
+</script>
 {% endblock%}
