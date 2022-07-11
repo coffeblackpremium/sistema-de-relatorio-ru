@@ -115,4 +115,3 @@ def table_event_update(request, id):
         return redirect('/users/tabelas')
     context['form_table_event'] = form
     return render(request, 'tables/tableEvent/tableEventUpdate.html', context=context)
-
