@@ -27,11 +27,9 @@
         <td>{{table.tecnico_presencial}}</td>
         <td>{{table.outras_acoes}}</td>
         <td>{{table.numbers_employee}}</td>
-        <form action="{% url 'description_table' id=table.id %}" method="get">
 
-          <td><button type="submit"><a href="{% url 'description_table' id=table.id %}" class="text-decoration-none">Visualizar
-          </a></button></td>
-        </form>
+          <td><a href="{% url 'description_table' id=table.id %}" class="text-decoration-none">Visualizar
+          </a></td>
         <td>{{table.date_actions}}</td>
         <form action="{% url 'deleteTableAction' id=table.id %}" method="POST">
             {% csrf_token %}
