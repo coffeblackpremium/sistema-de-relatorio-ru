@@ -7,6 +7,7 @@ from relatorios.models import TableActionModel, TableEventModel, User
 from .forms import RegisterEmployee, TableActionForm, TableEventForm
 from django.contrib.auth.decorators import login_required
 from .decorators import user_required
+from django.core.paginator import Paginator
 # Create your views here.
 
 def register_user(request):
@@ -56,20 +57,42 @@ def table_action(request):
 @login_required(login_url='contas/login')
 @user_required
 def tables(request):
-    tables_actions = TableActionModel.objects.filter(user=request.user).values()
-    tables_events = TableEventModel.objects.filter(user=request.user).values()
-    return render(request, 'tables/viewAllTable.html', {'tables_actions':tables_actions, 'tables_events':tables_events})
+    tables_actions = TableActionModel.objects.filter(user=request.user).values().order_by('-id')
+    tables_events = TableEventModel.objects.filter(user=request.user).values().order_by('-id')
+
+    paginator_table_actions = Paginator(tables_actions, 5)
+    paginator_table_events = Paginator(tables_events, 5)
+    page_number_table_action = request.GET.get('page_action')
+    page_number_table_event = request.GET.get('page_event')
+    table_action_page_object = paginator_table_actions.get_page(page_number_table_action)
+    table_event_page_object = paginator_table_events.get_page(page_number_table_event)
+
+    return render(request, 'tables/viewAllTable.html',
+    {
+    'table_action_page_object':table_action_page_object,
+    'table_event_page_object':table_event_page_object,})
+
+
+
 
 @login_required(login_url='contas/login')
 @user_required
 def description_table(request, id):
-    tables_actions = TableActionModel.objects.filter(user=request.user).values()
-    tables_events = TableEventModel.objects.filter(user=request.user).values()
+    tables_actions = TableActionModel.objects.filter(user=request.user).values().order_by('-id')
+    tables_events = TableEventModel.objects.filter(user=request.user).values().order_by('-id')
     id_description = get_object_or_404(tables_actions, id=id)
+
+    paginator_table_actions = Paginator(tables_actions, 5)
+    paginator_table_events = Paginator(tables_events, 5)
+    page_number_table_action = request.GET.get('page_action')
+    page_number_table_event = request.GET.get('page_event')
+    table_action_page_object = paginator_table_actions.get_page(page_number_table_action)
+    table_event_page_object = paginator_table_events.get_page(page_number_table_event)
+    
     return render(request, 'tables/tableAction/tableActionGetDescription.html', 
     {'id_description':id_description,
-    'tables_actions':tables_actions,
-     'tables_events':tables_events})
+    'table_action_page_object':table_action_page_object,
+    'table_event_page_object':table_event_page_object})
 
 
 @login_required(login_url='contas/login')
