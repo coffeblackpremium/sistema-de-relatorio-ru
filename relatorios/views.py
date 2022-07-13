@@ -39,6 +39,7 @@ def table_event(request):
         form_table_event = TableEventForm()
     return render(request, 'tables/tableEvent/tableEventRegister.html', {'form_table_event':form_table_event})
 
+#Tabela de Ação
 @login_required(login_url='contas/login')
 @user_required
 def table_action(request):
@@ -53,19 +54,12 @@ def table_action(request):
     else:
         form_table_action = TableActionForm()
     return render(request, 'tables/tableAction/tableActionRegister.html', {'form_table_action':form_table_action})
-
+#Visualizar as tabelas
 @login_required(login_url='contas/login')
 @user_required
 def tables(request):
-    tables_actions = TableActionModel.objects.filter(user=request.user).values().order_by('-id')
-    tables_events = TableEventModel.objects.filter(user=request.user).values().order_by('-id')
-
-    paginator_table_actions = Paginator(tables_actions, 5)
-    paginator_table_events = Paginator(tables_events, 5)
-    page_number_table_action = request.GET.get('page_action')
-    page_number_table_event = request.GET.get('page_event')
-    table_action_page_object = paginator_table_actions.get_page(page_number_table_action)
-    table_event_page_object = paginator_table_events.get_page(page_number_table_event)
+    table_action_page_object = TableActionModel.objects.filter(user=request.user).values().order_by('-id')
+    table_event_page_object = TableEventModel.objects.filter(user=request.user).values().order_by('-id')
 
     return render(request, 'tables/viewAllTable.html',
     {
@@ -74,27 +68,20 @@ def tables(request):
 
 
 
-
+#Descrição das Tabelas
 @login_required(login_url='contas/login')
 @user_required
 def description_table(request, id):
-    tables_actions = TableActionModel.objects.filter(user=request.user).values().order_by('-id')
-    tables_events = TableEventModel.objects.filter(user=request.user).values().order_by('-id')
-    id_description = get_object_or_404(tables_actions, id=id)
+    table_action_page_object = TableActionModel.objects.filter(user=request.user).values().order_by('-id')
+    table_event_page_object = TableEventModel.objects.filter(user=request.user).values().order_by('-id')
+    id_description = get_object_or_404(table_action_page_object, id=id)
 
-    paginator_table_actions = Paginator(tables_actions, 5)
-    paginator_table_events = Paginator(tables_events, 5)
-    page_number_table_action = request.GET.get('page_action')
-    page_number_table_event = request.GET.get('page_event')
-    table_action_page_object = paginator_table_actions.get_page(page_number_table_action)
-    table_event_page_object = paginator_table_events.get_page(page_number_table_event)
-    
     return render(request, 'tables/tableAction/tableActionGetDescription.html', 
     {'id_description':id_description,
     'table_action_page_object':table_action_page_object,
     'table_event_page_object':table_event_page_object})
 
-
+#deletar tabelas
 @login_required(login_url='contas/login')
 @user_required
 def deleteTableAction(request, id):
