@@ -34,9 +34,13 @@ class RegisterEmployee(UserCreationForm):
         user.sector_name = self.cleaned_data['sector_name']
         user.set_password(self.cleaned_data['password1'])
 
-        if commit:
-            user.save()
-        return user
+        if User.objects.filter(email=user.email).exists():
+            raise forms.ValidationError('Email já cadastrado')
+        elif User.objects.filter(username=user.username).exists():
+            raise forms.ValidationError('Este usuário já existe')
+        else:
+            if commit:
+                user.save()
 
     def __init__(self, *args, **kwargs):
         super(RegisterEmployee, self).__init__(*args, **kwargs)

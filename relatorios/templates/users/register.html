@@ -10,20 +10,27 @@
         <div class="col-md-6">
           <label for="username">Username</label>
           {{form.username}}
+          {{form.username.errors}}
           <label for="first_name">Nome</label>
           {{form.first_name}}
+          {{form.first_name.errors}}
           <label for="password1">Senha</label>
           {{form.password1}}
+          {{form.password1.errors}}
           <label for="email">Email</label>
           {{form.email}}
+          {{form.email.errors}}
         </div>
         <div class="col-md-6">
           <label for="last_name">Sobrenome</label>
           {{form.last_name}}
+          {{form.last_name.errors}}
           <label for="password2">Confirme a senha</label>
           {{form.password2}}
+          {{form.password2.errors}}
           <label for="sector_name">Setor</label>
           {{form.sector_name}}
+          {{form.sector_name.errors}}
         </div>
         <div class="col-md-12 text-center">
           <button type="submit" class="btn btn-success mt-3 border rounded">Registrar</button>
