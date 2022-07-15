@@ -6,16 +6,17 @@ from django.contrib.auth import authenticate, login
 from relatorios.models import TableActionModel, TableEventModel, User
 from .forms import RegisterEmployee, TableActionForm, TableEventForm
 from django.contrib.auth.decorators import login_required
-from .decorators import user_required
+from .decorators import check_user_is_authenticated, user_required
 from django.core.paginator import Paginator
 # Create your views here.
 
+@check_user_is_authenticated
 def register_user(request):
     if request.method == 'POST':
         form = RegisterEmployee(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/home/test')
+            return redirect('/users/contas/login/')
     else:
         form = RegisterEmployee()
     return render(request, 'users/register.html', {'form':form})
